@@ -1,23 +1,16 @@
-- name: "Demonstrate connecting to switches"
-  hosts: prod_switches
+---
+- name: L2 Interface Config
+  hosts: test_switches
   gather_facts: no
 
   tasks:
-    ###
-    # Collect data
-    ##
-    - name: Gather facts (ops)
-      ios_facts:
-      when: ansible_network_os == 'ios'
+    - name: Set GigabitEthernet0/8 to default
+      ios_l2_interface:
+        name: GigabitEthernet0/8
+        state: unconfigured
 
-    ###
-    # Demonstrate variables
-    #
-    - name: Display facts
-      debug:
-        msg: "Hostname: {{ ansible_net_hostname }} 
-              OS: {{ ansible_net_version }}
-              Version: {{ ansible_net_version }}
-              Model: Model: {{ ansible_net_model }}
-              Serial: {{ ansible_net_serialnum }}"
-   
+    - name: Ensure GigabitEthernet0/8 is configured for access vlan 30
+      ios_l2_interface:
+        name: GigabitEthernet0/8
+        mode: access
+        access_vlan: "30"
