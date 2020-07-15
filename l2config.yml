@@ -1,0 +1,23 @@
+- name: "Demonstrate connecting to switches"
+  hosts: prod_switches
+  gather_facts: no
+
+  tasks:
+    ###
+    # Collect data
+    ##
+    - name: Gather facts (ops)
+      ios_facts:
+      when: ansible_network_os == 'ios'
+
+    ###
+    # Demonstrate variables
+    #
+    - name: Display facts
+      debug:
+        msg: "Hostname: {{ ansible_net_hostname }} 
+              OS: {{ ansible_net_version }}
+              Version: {{ ansible_net_version }}
+              Model: Model: {{ ansible_net_model }}
+              Serial: {{ ansible_net_serialnum }}"
+   
