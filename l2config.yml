@@ -2,15 +2,18 @@
 - name: L2 Interface Config
   hosts: test_switches
   gather_facts: no
+  vars:
+    interfacetype: GigabitEthernet0
+    access_vlan_set: 30
 
   tasks:
-    - name: Set GigabitEthernet0/8 to default
+    - name: Set "{{ interfacetype }}/8" to default
       ios_l2_interface:
-        name: GigabitEthernet0/8
+        name: "{{ interfacetype }}/8"
         state: unconfigured
 
-    - name: Ensure GigabitEthernet0/8 is configured for access vlan 30
+    - name: Ensure "{{ interfacetype }}0/8" is configured for access vlan "{{ access_vlan_set }}"
       ios_l2_interface:
-        name: GigabitEthernet0/8
+        name: "{{ interfacetype }}/8"
         mode: access
-        access_vlan: "30"
+        access_vlan: "{{ access_vlan_set }}"
