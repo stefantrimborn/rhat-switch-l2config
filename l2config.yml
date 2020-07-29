@@ -4,7 +4,7 @@
   gather_facts: no
   vars:
     interfacetype: GigabitEthernet0
-    access_vlan_set: 30
+    access_vlan_set: 20
 
   tasks:
     - name: Set "{{ interfacetype }}/8" to default
