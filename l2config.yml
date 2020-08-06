@@ -12,7 +12,7 @@
         name: "{{ interfacetype }}/8"
         state: unconfigured
 
-    - name: Ensure "{{ interfacetype }}0/8" is configured for access vlan "{{ access_vlan_set }}"
+    - name: Ensure "{{ interfacetype }}/8" is configured for access vlan "{{ access_vlan_set }}"
       ios_l2_interface:
         name: "{{ interfacetype }}/8"
         mode: access
